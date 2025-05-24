@@ -1,12 +1,26 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState } from "react";
+import { Search, Menu, TrendingUp, Globe, Building, DollarSign, BarChart3, Calendar, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import Navigation from "@/components/Navigation";
+import Hero from "@/components/Hero";
+import FeaturedArticles from "@/components/FeaturedArticles";
+import MarketDashboard from "@/components/MarketDashboard";
+import Newsletter from "@/components/Newsletter";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-slate-50">
+      <Navigation />
+      <Hero />
+      <MarketDashboard />
+      <FeaturedArticles />
+      <Newsletter />
+      <Footer />
     </div>
   );
 };
