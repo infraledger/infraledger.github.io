@@ -1,26 +1,25 @@
 
-import { useState } from "react";
-import { Search, Menu, TrendingUp, Globe, Building, DollarSign, BarChart3, Calendar, User } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
 import FeaturedArticles from "@/components/FeaturedArticles";
-import MarketDashboard from "@/components/MarketDashboard";
+import AppSidebar from "@/components/AppSidebar";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-white">
       <Navigation />
-      <Hero />
-      <MarketDashboard />
-      <FeaturedArticles />
-      <Newsletter />
-      <Footer />
+      <SidebarProvider>
+        <div className="flex w-full">
+          <AppSidebar />
+          <main className="flex-1 bg-white">
+            <FeaturedArticles />
+            <Newsletter />
+            <Footer />
+          </main>
+        </div>
+      </SidebarProvider>
     </div>
   );
 };
