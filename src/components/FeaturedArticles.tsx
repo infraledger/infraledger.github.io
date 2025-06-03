@@ -1,192 +1,218 @@
 
-import { Clock, User, ArrowRight, Bookmark, Share2 } from "lucide-react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Clock, User, ArrowRight, Zap, Building2, Globe2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const FeaturedArticles = () => {
-  const featuredStory = {
-    id: 0,
-    title: "Global Infrastructure Investment Reaches $2.8 Trillion in 2024",
-    summary: "New data reveals unprecedented capital flows into sustainable infrastructure projects across emerging markets, with renewable energy leading the charge at 45% of total investments.",
-    author: "Sarah Chen",
-    publishTime: "2 hours ago",
-    category: "Market Analysis",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=600",
-    readTime: "8 min read"
-  };
-
-  const articles = [
+  const newsHighlights = [
     {
       id: 1,
-      title: "Singapore's $50B Smart City Initiative Breaks Ground",
-      summary: "Southeast Asia's largest urban transformation project launches with focus on sustainable transport and digital infrastructure.",
-      author: "Michael Rodriguez",
-      publishTime: "4 hours ago",
-      category: "Smart Cities",
-      image: "https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=600&h=300",
-      readTime: "5 min read"
+      category: "Renewable Energy",
+      subcategory: "Solar",
+      title: "Solar Manufacturing Faces Headwinds",
+      summary: "Swiss solar manufacturer Meyer Burger ceased production at its Arizona facility, laying off 282 employees due to financial difficulties, highlighting ongoing challenges in the solar manufacturing sector despite overall market growth.",
+      author: "Energy Correspondent",
+      publishTime: "2 hours ago",
+      readTime: "3 min read",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&h=400",
+      priority: "high"
     },
     {
       id: 2,
-      title: "African Development Bank Commits $12B to Renewable Energy",
-      summary: "Historic funding package targets solar and wind projects across 15 countries, supporting energy transition goals.",
-      author: "Amara Okafor",
-      publishTime: "6 hours ago",
       category: "Renewable Energy",
-      image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&h=300",
-      readTime: "7 min read"
+      subcategory: "Investment",
+      title: "Grenergy Announces Major BESS Investment",
+      summary: "Grenergy outlined a €3.5 billion investment plan for 2025-2027, targeting battery energy storage systems (BESS) and hybrid renewable projects, emphasizing the growing importance of storage solutions.",
+      author: "Investment Analyst",
+      publishTime: "4 hours ago",
+      readTime: "4 min read",
+      image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=800&h=400",
+      priority: "high"
     },
     {
       id: 3,
-      title: "European Rail Corridor Investment Reaches €25B Milestone",
-      summary: "Cross-border high-speed rail connections accelerate as EU infrastructure fund reaches major funding threshold.",
-      author: "Elena Kovač",
-      publishTime: "8 hours ago",
       category: "Transportation",
-      image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=600&h=300",
-      readTime: "6 min read"
+      subcategory: "Aviation",
+      title: "Urgent Call for US Air Traffic Control System Overhaul",
+      summary: "U.S. officials are calling for a complete multi-billion dollar rebuild of the aging national air traffic control (ATC) system, citing recent disruptions and system vulnerabilities.",
+      author: "Transport Editor",
+      publishTime: "6 hours ago",
+      readTime: "5 min read",
+      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800&h=400",
+      priority: "breaking"
     },
     {
       id: 4,
-      title: "Digital Infrastructure Drives $200B Investment Wave",
-      summary: "Data centers, fiber networks, and 5G deployments attract unprecedented private capital amid AI boom.",
-      author: "James Park",
-      publishTime: "10 hours ago",
-      category: "Digital Infrastructure",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=600&h=300",
-      readTime: "8 min read"
+      category: "Transportation",
+      subcategory: "Rail",
+      title: "High-Speed Rail Developments in Europe and Asia",
+      summary: "Estonia signed $1.06 billion in construction contracts for the Rail Baltica project, and Czechia broke ground on its first high-speed rail line. Vietnam plans to commence development of its Hanoi-Ho Chi Minh City HSR in December 2025.",
+      author: "Infrastructure Reporter",
+      publishTime: "8 hours ago",
+      readTime: "6 min read",
+      image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=800&h=400",
+      priority: "normal"
     },
     {
       id: 5,
-      title: "Water Infrastructure Crisis Sparks $180B Global Response",
-      summary: "International coalition mobilizes massive funding to address water scarcity and aging infrastructure worldwide.",
-      author: "Dr. Priya Sharma",
+      category: "Renewable Energy",
+      subcategory: "Hydrogen",
+      title: "Green Hydrogen Project Challenges",
+      summary: "Saudi Neom's major green hydrogen initiative is reportedly struggling to secure off-take agreements, while Statkraft advances plans for new green hydrogen projects, indicating both progress and market uncertainties in the sector.",
+      author: "Energy Analyst",
+      publishTime: "10 hours ago",
+      readTime: "4 min read",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&h=400",
+      priority: "normal"
+    },
+    {
+      id: 6,
+      category: "Transportation",
+      subcategory: "Ports",
+      title: "Major Port Expansion Projects Advance",
+      summary: "The Houston Ship Channel Expansion (Project 11) is now approximately 70% dredged. Salt Lake City's Utah Inland Port has started site work, and the Port of Palm Beach completed Phase 1 of its infrastructure development program.",
+      author: "Port Correspondent",
       publishTime: "12 hours ago",
-      category: "Water Infrastructure",
-      image: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&w=600&h=300",
-      readTime: "9 min read"
+      readTime: "5 min read",
+      image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=800&h=400",
+      priority: "normal"
     }
   ];
 
-  const getCategoryColor = (category: string) => {
-    const colors = {
-      "Market Analysis": "bg-red-600",
-      "Smart Cities": "bg-purple-600",
-      "Renewable Energy": "bg-green-600",
-      "Transportation": "bg-blue-600",
-      "Digital Infrastructure": "bg-indigo-600",
-      "Water Infrastructure": "bg-cyan-600",
-      "ESG & Policy": "bg-orange-600"
-    };
-    return colors[category as keyof typeof colors] || "bg-slate-600";
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case "Renewable Energy":
+        return <Zap className="h-4 w-4" />;
+      case "Transportation":
+        return <Globe2 className="h-4 w-4" />;
+      default:
+        return <Building2 className="h-4 w-4" />;
+    }
+  };
+
+  const getPriorityBadge = (priority: string) => {
+    switch (priority) {
+      case "breaking":
+        return <Badge className="bg-red-600/20 text-red-400 border-red-600/30 animate-pulse">BREAKING</Badge>;
+      case "high":
+        return <Badge className="bg-orange-600/20 text-orange-400 border-orange-600/30">HIGH PRIORITY</Badge>;
+      default:
+        return null;
+    }
   };
 
   return (
-    <section className="py-12">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-8 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="w-1 h-8 bg-gradient-to-b from-cyan-400 to-blue-600 rounded-full"></div>
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+              Global Infrastructure Intelligence Hub
+            </h2>
+          </div>
+          <p className="text-lg text-slate-400 mb-2">Daily Briefing: May 30, 2025</p>
+          <div className="h-px bg-gradient-to-r from-cyan-500/50 via-blue-500/50 to-transparent"></div>
+        </div>
+
         {/* Featured Story */}
         <div className="mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-bold text-slate-900">Breaking News</h1>
-            <div className="flex space-x-2">
-              <Button variant="outline" size="sm" className="text-slate-600">
-                <Bookmark className="h-4 w-4 mr-1" />
-                Save
-              </Button>
-              <Button variant="outline" size="sm" className="text-slate-600">
-                <Share2 className="h-4 w-4 mr-1" />
-                Share
-              </Button>
-            </div>
-          </div>
-
-          <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <Card className="bg-slate-800/50 border-slate-700/50 shadow-2xl backdrop-blur-lg overflow-hidden group hover:border-cyan-500/30 transition-all duration-500">
             <div className="relative">
               <img 
-                src={featuredStory.image}
-                alt={featuredStory.title}
-                className="w-full h-80 object-cover"
+                src={newsHighlights[0].image}
+                alt="Featured story"
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <Badge className={`absolute top-6 left-6 text-white ${getCategoryColor(featuredStory.category)}`}>
-                {featuredStory.category}
-              </Badge>
-            </div>
-            <CardContent className="p-8">
-              <h2 className="text-3xl font-bold text-slate-900 mb-4 leading-tight">
-                {featuredStory.title}
-              </h2>
-              <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-                {featuredStory.summary}
-              </p>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-6 text-sm text-slate-500">
-                  <div className="flex items-center space-x-2">
-                    <User className="h-4 w-4" />
-                    <span className="font-medium">{featuredStory.author}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Clock className="h-4 w-4" />
-                    <span>{featuredStory.publishTime}</span>
-                  </div>
-                  <span className="text-slate-400">{featuredStory.readTime}</span>
-                </div>
-                <Button className="bg-slate-900 hover:bg-slate-800 text-white">
-                  Read Full Story
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
+              <div className="absolute top-4 left-4 flex items-center space-x-2">
+                {getPriorityBadge(newsHighlights[0].priority)}
+                <Badge className="bg-cyan-600/20 text-cyan-400 border-cyan-600/30">
+                  {getCategoryIcon(newsHighlights[0].category)}
+                  <span className="ml-1">{newsHighlights[0].subcategory}</span>
+                </Badge>
               </div>
-            </CardContent>
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <h1 className="text-2xl font-bold text-white mb-3 leading-tight group-hover:text-cyan-400 transition-colors duration-300">
+                  {newsHighlights[0].title}
+                </h1>
+                <p className="text-slate-300 text-lg mb-4 leading-relaxed">
+                  {newsHighlights[0].summary}
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4 text-sm text-slate-400">
+                    <div className="flex items-center space-x-1">
+                      <User className="h-4 w-4" />
+                      <span>{newsHighlights[0].author}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Clock className="h-4 w-4" />
+                      <span>{newsHighlights[0].publishTime}</span>
+                    </div>
+                  </div>
+                  <Button className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold border border-cyan-500/30">
+                    Read Full Story
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
           </Card>
         </div>
 
-        {/* Latest News Grid */}
+        {/* News Grid */}
         <div className="mb-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-6">Latest Updates</h2>
+          <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+            <div className="w-1 h-6 bg-gradient-to-b from-cyan-400 to-blue-600 rounded-full mr-3"></div>
+            Key News Highlights
+          </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {articles.map((article) => (
-              <Card key={article.id} className="group hover:shadow-lg transition-all duration-300 border border-slate-200 overflow-hidden">
+            {newsHighlights.slice(1).map((article) => (
+              <Card key={article.id} className="bg-slate-800/30 border-slate-700/50 shadow-xl backdrop-blur-lg hover:bg-slate-800/50 hover:border-cyan-500/30 transition-all duration-300 group cursor-pointer">
                 <div className="relative overflow-hidden">
                   <img 
                     src={article.image}
                     alt={article.title}
-                    className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <Badge className={`absolute top-3 left-3 text-white text-xs ${getCategoryColor(article.category)}`}>
-                    {article.category}
-                  </Badge>
+                  <div className="absolute top-3 left-3 flex items-center space-x-2">
+                    {getPriorityBadge(article.priority)}
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <Badge className="bg-slate-900/80 text-cyan-400 border-cyan-500/30 backdrop-blur-sm">
+                      {getCategoryIcon(article.category)}
+                      <span className="ml-1">{article.subcategory}</span>
+                    </Badge>
+                  </div>
                 </div>
-                <CardContent className="p-5">
-                  <h3 className="text-lg font-semibold text-slate-900 group-hover:text-slate-700 transition-colors line-clamp-2 mb-3">
+                <CardHeader className="pb-3">
+                  <h3 className="text-lg font-semibold text-white group-hover:text-cyan-400 transition-colors duration-300 line-clamp-2">
                     {article.title}
                   </h3>
-                  <p className="text-slate-600 mb-4 line-clamp-2 text-sm leading-relaxed">
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-slate-400 text-sm mb-4 line-clamp-3 leading-relaxed">
                     {article.summary}
                   </p>
                   <div className="flex items-center justify-between text-xs text-slate-500">
                     <div className="flex items-center space-x-3">
-                      <div className="flex items-center space-x-1">
-                        <User className="h-3 w-3" />
-                        <span>{article.author}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Clock className="h-3 w-3" />
-                        <span>{article.publishTime}</span>
-                      </div>
+                      <span className="flex items-center">
+                        <User className="h-3 w-3 mr-1" />
+                        {article.author}
+                      </span>
+                      <span className="flex items-center">
+                        <Clock className="h-3 w-3 mr-1" />
+                        {article.publishTime}
+                      </span>
                     </div>
-                    <span className="text-slate-400">{article.readTime}</span>
+                    <span className="text-cyan-400">{article.readTime}</span>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-        </div>
-
-        <div className="text-center">
-          <Button variant="outline" className="text-slate-700 border-slate-300 hover:bg-slate-50">
-            Load More Articles
-            <ArrowRight className="h-4 w-4 ml-2" />
-          </Button>
         </div>
       </div>
     </section>
