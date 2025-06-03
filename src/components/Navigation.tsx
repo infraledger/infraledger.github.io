@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Search, Menu, Bell, TrendingUp, ChevronDown } from "lucide-react";
+import { Search, Menu, Bell, TrendingUp, ChevronDown, SidebarTrigger } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -39,10 +39,12 @@ const Navigation = () => {
       label: "Sectors", 
       href: "#sectors",
       subitems: [
-        { label: "Transportation", href: "#transport" },
         { label: "Energy", href: "#energy" },
+        { label: "Transportation", href: "#transport" },
         { label: "Digital Infrastructure", href: "#digital" },
-        { label: "Water & Utilities", href: "#utilities" }
+        { label: "Water & Utilities", href: "#utilities" },
+        { label: "Housing", href: "#housing" },
+        { label: "Health", href: "#health" }
       ]
     },
     { 
@@ -73,14 +75,14 @@ const Navigation = () => {
 
   return (
     <>
-      {/* Top trending bar with high-tech design */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-cyan-400 py-2 overflow-hidden border-b border-cyan-500/20">
+      {/* Top trending bar */}
+      <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 text-cyan-400 py-2 overflow-hidden border-b border-cyan-500/20 shadow-lg">
         <div className="max-w-7xl mx-auto">
           <div className="flex animate-scroll">
             <div className="flex items-center space-x-8 whitespace-nowrap">
               <div className="flex items-center space-x-2 font-semibold">
                 <TrendingUp className="h-4 w-4 text-cyan-400" />
-                <span className="text-sm bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">TRENDING:</span>
+                <span className="text-sm bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent font-bold">TRENDING:</span>
               </div>
               {trendingTopics.map((topic, index) => (
                 <span key={index} className="text-sm text-slate-300 hover:text-cyan-400 cursor-pointer transition-colors duration-300">
@@ -92,23 +94,24 @@ const Navigation = () => {
         </div>
       </div>
 
-      {/* Main navigation with high-tech styling */}
-      <nav className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b border-slate-700/50 sticky top-0 z-50 shadow-2xl backdrop-blur-lg">
+      {/* Main navigation */}
+      <nav className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border-b border-slate-700/50 sticky top-0 z-50 shadow-2xl backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo with glow effect */}
-            <div className="flex items-center">
+            {/* Sidebar trigger and Logo */}
+            <div className="flex items-center space-x-4">
+              <SidebarTrigger className="text-slate-400 hover:text-cyan-400 hover:bg-slate-800/50 transition-all duration-300" />
               <div className="relative">
                 <img 
                   src="/lovable-uploads/22c4d9da-1751-48f9-92d5-30f3ff8b9734.png" 
                   alt="InfraLedger" 
-                  className="h-10 w-auto filter drop-shadow-lg"
+                  className="h-8 w-auto filter drop-shadow-lg"
                 />
                 <div className="absolute inset-0 bg-cyan-400/10 blur-xl rounded-full"></div>
               </div>
             </div>
 
-            {/* Desktop Navigation with high-tech styling */}
+            {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center">
               <NavigationMenu>
                 <NavigationMenuList className="space-x-1">
@@ -116,11 +119,11 @@ const Navigation = () => {
                     <NavigationMenuItem key={item.label}>
                       {item.subitems ? (
                         <>
-                          <NavigationMenuTrigger className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-3 transition-all duration-300 hover:bg-slate-800/50 rounded-md border border-transparent hover:border-cyan-500/30">
+                          <NavigationMenuTrigger className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-4 transition-all duration-300 hover:bg-slate-800/50 rounded-lg border border-transparent hover:border-cyan-500/30 bg-transparent">
                             {item.label}
                           </NavigationMenuTrigger>
                           <NavigationMenuContent>
-                            <div className="grid gap-1 p-4 w-64 bg-slate-900/95 backdrop-blur-lg border border-slate-700/50 shadow-2xl">
+                            <div className="grid gap-1 p-4 w-64 bg-slate-950/95 backdrop-blur-xl border border-slate-700/50 shadow-2xl rounded-lg">
                               {item.subitems.map((subitem) => (
                                 <a
                                   key={subitem.label}
@@ -136,7 +139,7 @@ const Navigation = () => {
                       ) : (
                         <a
                           href={item.href}
-                          className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-3 flex items-center transition-all duration-300 hover:bg-slate-800/50 rounded-md border border-transparent hover:border-cyan-500/30"
+                          className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-4 flex items-center transition-all duration-300 hover:bg-slate-800/50 rounded-lg border border-transparent hover:border-cyan-500/30"
                         >
                           {item.label}
                         </a>
@@ -147,20 +150,20 @@ const Navigation = () => {
               </NavigationMenu>
             </div>
 
-            {/* Search and Actions with high-tech styling */}
+            {/* Search and Actions */}
             <div className="hidden md:flex items-center space-x-4">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                 <Input
                   type="search"
-                  placeholder="Search news, companies, projects..."
-                  className="pl-10 w-80 bg-slate-800/50 border-slate-600 focus:border-cyan-500 focus:ring-cyan-500/20 text-sm text-slate-200 placeholder-slate-400 backdrop-blur-sm"
+                  placeholder="Search projects, companies..."
+                  className="pl-10 w-80 bg-slate-800/50 border-slate-600 focus:border-cyan-500 focus:ring-cyan-500/20 text-sm text-slate-200 placeholder-slate-400 backdrop-blur-sm rounded-lg"
                 />
               </div>
-              <Button variant="ghost" size="sm" className="text-slate-400 hover:text-cyan-400 hover:bg-slate-800/50 transition-all duration-300">
+              <Button variant="ghost" size="sm" className="text-slate-400 hover:text-cyan-400 hover:bg-slate-800/50 transition-all duration-300 rounded-lg">
                 <Bell className="h-4 w-4" />
               </Button>
-              <Button className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-medium px-6 text-sm shadow-lg border border-cyan-500/30 transition-all duration-300">
+              <Button className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-medium px-6 text-sm shadow-lg border border-cyan-500/30 transition-all duration-300 rounded-lg">
                 Subscribe
               </Button>
             </div>
@@ -179,7 +182,7 @@ const Navigation = () => {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="lg:hidden py-4 border-t border-slate-700/50 bg-slate-900/95 backdrop-blur-lg">
+            <div className="lg:hidden py-4 border-t border-slate-700/50 bg-slate-950/95 backdrop-blur-xl rounded-b-lg">
               <div className="flex flex-col space-y-3">
                 {mainNavItems.map((item) => (
                   <div key={item.label}>
@@ -208,9 +211,9 @@ const Navigation = () => {
                   <Input
                     type="search"
                     placeholder="Search..."
-                    className="mb-3 bg-slate-800/50 border-slate-600 text-slate-200 placeholder-slate-400"
+                    className="mb-3 bg-slate-800/50 border-slate-600 text-slate-200 placeholder-slate-400 rounded-lg"
                   />
-                  <Button className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-medium">
+                  <Button className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-medium rounded-lg">
                     Subscribe
                   </Button>
                 </div>
