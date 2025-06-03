@@ -1,9 +1,8 @@
 
 import { useState } from "react";
-import { Search, Menu, Bell, TrendingUp, ChevronDown } from "lucide-react";
+import { Search, Menu, Bell, TrendingUp, ChevronDown, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,6 +10,18 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+} from "@/components/ui/dropdown-menu";
+import { infrastructureTypes } from "@/data/infrastructureData";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,18 +48,6 @@ const Navigation = () => {
       ]
     },
     { 
-      label: "Sectors", 
-      href: "#sectors",
-      subitems: [
-        { label: "Energy", href: "#energy" },
-        { label: "Transportation", href: "#transport" },
-        { label: "Digital Infrastructure", href: "#digital" },
-        { label: "Water & Utilities", href: "#utilities" },
-        { label: "Housing", href: "#housing" },
-        { label: "Health", href: "#health" }
-      ]
-    },
-    { 
       label: "Geographies", 
       href: "#geo",
       subitems: [
@@ -59,13 +58,17 @@ const Navigation = () => {
       ]
     },
     { label: "Events", href: "#events" },
-    { label: "Community", href: "#community" }
+    { 
+      label: "Community", 
+      href: "/community",
+      icon: <Users className="h-4 w-4" />
+    }
   ];
 
   const trendingTopics = [
     "Global Infrastructure Investment Hits $2.8T",
-    "Green Bonds Rally Continues",
-    "Asian Infrastructure Bank Expansion", 
+    "Green Bonds Rally Continues", 
+    "Asian Infrastructure Bank Expansion",
     "5G Network Investment Surge",
     "EU Green Deal Infrastructure Package",
     "US Infrastructure Bill Updates",
@@ -99,14 +102,13 @@ const Navigation = () => {
       <nav className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border-b border-slate-700/50 sticky top-0 z-50 shadow-2xl backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Sidebar trigger and Logo */}
+            {/* Logo */}
             <div className="flex items-center space-x-4">
-              <SidebarTrigger className="text-slate-400 hover:text-cyan-400 hover:bg-slate-800/50 transition-all duration-300" />
               <div className="relative">
                 <img 
                   src="/lovable-uploads/22c4d9da-1751-48f9-92d5-30f3ff8b9734.png" 
                   alt="InfraLedger" 
-                  className="h-8 w-auto filter drop-shadow-lg"
+                  className="h-10 w-auto filter drop-shadow-lg"
                 />
                 <div className="absolute inset-0 bg-cyan-400/10 blur-xl rounded-full"></div>
               </div>
@@ -121,7 +123,10 @@ const Navigation = () => {
                       {item.subitems ? (
                         <>
                           <NavigationMenuTrigger className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-4 transition-all duration-300 hover:bg-slate-800/50 rounded-lg border border-transparent hover:border-cyan-500/30 bg-transparent">
-                            {item.label}
+                            <div className="flex items-center space-x-1">
+                              {item.icon}
+                              <span>{item.label}</span>
+                            </div>
                           </NavigationMenuTrigger>
                           <NavigationMenuContent>
                             <div className="grid gap-1 p-4 w-64 bg-slate-950/95 backdrop-blur-xl border border-slate-700/50 shadow-2xl rounded-lg">
@@ -140,13 +145,45 @@ const Navigation = () => {
                       ) : (
                         <a
                           href={item.href}
-                          className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-4 flex items-center transition-all duration-300 hover:bg-slate-800/50 rounded-lg border border-transparent hover:border-cyan-500/30"
+                          className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-4 flex items-center space-x-1 transition-all duration-300 hover:bg-slate-800/50 rounded-lg border border-transparent hover:border-cyan-500/30"
                         >
-                          {item.label}
+                          {item.icon}
+                          <span>{item.label}</span>
                         </a>
                       )}
                     </NavigationMenuItem>
                   ))}
+
+                  {/* Infrastructure Sectors Dropdown */}
+                  <NavigationMenuItem>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-4 transition-all duration-300 hover:bg-slate-800/50 rounded-lg border border-transparent hover:border-cyan-500/30">
+                          Sectors
+                          <ChevronDown className="ml-1 h-3 w-3" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="w-64 bg-slate-950/95 backdrop-blur-xl border border-slate-700/50 shadow-2xl max-h-96 overflow-y-auto">
+                        <DropdownMenuLabel className="text-cyan-400 font-semibold">Infrastructure Sectors</DropdownMenuLabel>
+                        <DropdownMenuSeparator className="bg-slate-700/50" />
+                        {Object.entries(infrastructureTypes).map(([sector, data]) => (
+                          <DropdownMenuSub key={sector}>
+                            <DropdownMenuSubTrigger className="text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50">
+                              <span className="mr-2">{data.icon}</span>
+                              {sector}
+                            </DropdownMenuSubTrigger>
+                            <DropdownMenuSubContent className="w-64 bg-slate-950/95 backdrop-blur-xl border border-slate-700/50 shadow-2xl max-h-64 overflow-y-auto">
+                              {data.subtypes.map((subtype, index) => (
+                                <DropdownMenuItem key={index} className="text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50">
+                                  {subtype}
+                                </DropdownMenuItem>
+                              ))}
+                            </DropdownMenuSubContent>
+                          </DropdownMenuSub>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
@@ -189,12 +226,13 @@ const Navigation = () => {
                   <div key={item.label}>
                     <a
                       href={item.href}
-                      className="text-slate-300 hover:text-cyan-400 font-medium py-2 block transition-colors duration-300"
+                      className="text-slate-300 hover:text-cyan-400 font-medium py-2 block transition-colors duration-300 flex items-center space-x-2"
                     >
-                      {item.label}
+                      {item.icon}
+                      <span>{item.label}</span>
                     </a>
                     {item.subitems && (
-                      <div className="ml-4 mt-2 space-y-2">
+                      <div className="ml-6 mt-2 space-y-2">
                         {item.subitems.map((subitem) => (
                           <a
                             key={subitem.label}
