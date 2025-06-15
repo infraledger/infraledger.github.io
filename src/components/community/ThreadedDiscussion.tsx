@@ -178,7 +178,7 @@ function Thread({ post, level = 0 }: { post: any; level?: number }) {
       <div className="text-slate-300 mb-2">{post.content}</div>
       <div>
         <Button
-          size="xs"
+          size="sm"
           variant="outline"
           className="text-xs mr-2"
           disabled={!IS_AUTH}
