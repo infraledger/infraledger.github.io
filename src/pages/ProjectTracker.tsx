@@ -9,11 +9,21 @@ const ProjectTracker = () => (
       <h1 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-cyan-400 via-blue-400 to-blue-200 bg-clip-text text-transparent mb-4 text-center">
         Project Tracker
       </h1>
-      <p className="text-slate-400 text-lg mb-4 text-center">
-        Explore infrastructure project pipelines, status tracking, and analytics.
+      <p className="text-slate-400 text-lg mb-6 text-center">
+        Explore infrastructure project pipelines, track project statuses globally, and visualize key analytics.
       </p>
-      <div className="rounded-xl bg-slate-900/80 p-6 text-slate-300 text-center shadow-lg">
-        <span className="text-yellow-400 font-medium">Project tracker dashboard coming soon!</span>
+      <div className="rounded-xl bg-slate-900/80 p-8 text-slate-300 shadow-lg flex flex-col items-center">
+        <img
+          src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80"
+          alt="Placeholder: team analyzing project screens"
+          className="w-full max-w-md rounded-lg shadow-lg mb-6 object-cover h-56"
+        />
+        <span className="text-yellow-400 font-medium text-lg">
+          Project tracker dashboard coming soon!
+        </span>
+        <p className="mt-2 text-slate-400 text-sm">
+          You’ll soon be able to search and track major infrastructure projects.
+        </p>
       </div>
     </main>
     <Footer />
