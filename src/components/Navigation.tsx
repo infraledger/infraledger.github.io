@@ -23,6 +23,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { infrastructureTypes } from "@/data/infrastructureData";
 
+// Import refactored components
+import TrendingBar from "./navigation/TrendingBar";
+import MainNavigation from "./navigation/MainNavigation";
+import MobileNavigation from "./navigation/MobileNavigation";
+
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -57,7 +62,7 @@ const Navigation = () => {
         { label: "Emerging Markets", href: "#emerging" }
       ]
     },
-    { label: "Events", to: "/events" }, // <-- route to /events page
+    { label: "Events", to: "/events" },
     { 
       label: "Community", 
       to: "/community",
@@ -79,26 +84,8 @@ const Navigation = () => {
 
   return (
     <>
-      {/* Top trending bar */}
-      <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 text-cyan-400 py-2 overflow-hidden border-b border-cyan-500/20 shadow-lg">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex animate-scroll">
-            <div className="flex items-center space-x-8 whitespace-nowrap">
-              <div className="flex items-center space-x-2 font-semibold">
-                <TrendingUp className="h-4 w-4 text-cyan-400" />
-                <span className="text-sm bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent font-bold">TRENDING:</span>
-              </div>
-              {trendingTopics.map((topic, index) => (
-                <span key={index} className="text-sm text-slate-300 hover:text-cyan-400 cursor-pointer transition-colors duration-300">
-                  {topic}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      <TrendingBar trendingTopics={trendingTopics} />
 
-      {/* Main navigation */}
       <nav className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border-b border-slate-700/50 sticky top-0 z-50 shadow-2xl backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -116,84 +103,7 @@ const Navigation = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center">
-              <NavigationMenu>
-                <NavigationMenuList className="space-x-1">
-                  {mainNavItems.map((item) => (
-                    <NavigationMenuItem key={item.label}>
-                      {item.subitems ? (
-                        <>
-                          <NavigationMenuTrigger className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-4 transition-all duration-300 hover:bg-slate-800/50 rounded-lg border border-transparent hover:border-cyan-500/30 bg-transparent">
-                            <div className="flex items-center space-x-1">
-                              {item.icon}
-                              <span>{item.label}</span>
-                            </div>
-                          </NavigationMenuTrigger>
-                          <NavigationMenuContent>
-                            <div className="grid gap-1 p-4 w-64 bg-slate-950/95 backdrop-blur-xl border border-slate-700/50 shadow-2xl rounded-lg">
-                              {item.subitems.map((subitem) => (
-                                <a
-                                  key={subitem.label}
-                                  href={subitem.href}
-                                  className="block px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-md transition-all duration-300 border border-transparent hover:border-cyan-500/30"
-                                >
-                                  {subitem.label}
-                                </a>
-                              ))}
-                            </div>
-                          </NavigationMenuContent>
-                        </>
-                      ) : item.to ? (
-                        <Link
-                          to={item.to}
-                          className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-4 flex items-center space-x-1 transition-all duration-300 hover:bg-slate-800/50 rounded-lg border border-transparent hover:border-cyan-500/30"
-                        >
-                          {item.icon}
-                          <span>{item.label}</span>
-                        </Link>
-                      ) : (
-                        <a
-                          href={item.href}
-                          className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-4 flex items-center space-x-1 transition-all duration-300 hover:bg-slate-800/50 rounded-lg border border-transparent hover:border-cyan-500/30"
-                        >
-                          {item.icon}
-                          <span>{item.label}</span>
-                        </a>
-                      )}
-                    </NavigationMenuItem>
-                  ))}
-
-                  {/* Infrastructure Sectors Dropdown */}
-                  <NavigationMenuItem>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-4 transition-all duration-300 hover:bg-slate-800/50 rounded-lg border border-transparent hover:border-cyan-500/30">
-                          Sectors
-                          <ChevronDown className="ml-1 h-3 w-3" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-64 bg-slate-950/95 backdrop-blur-xl border border-slate-700/50 shadow-2xl max-h-96 overflow-y-auto">
-                        <DropdownMenuLabel className="text-cyan-400 font-semibold">Infrastructure Sectors</DropdownMenuLabel>
-                        <DropdownMenuSeparator className="bg-slate-700/50" />
-                        {Object.entries(infrastructureTypes).map(([sector, data]) => (
-                          <DropdownMenuSub key={sector}>
-                            <DropdownMenuSubTrigger className="text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50">
-                              <span className="mr-2">{data.icon}</span>
-                              {sector}
-                            </DropdownMenuSubTrigger>
-                            <DropdownMenuSubContent className="w-64 bg-slate-950/95 backdrop-blur-xl border border-slate-700/50 shadow-2xl max-h-64 overflow-y-auto">
-                              {data.subtypes.map((subtype, index) => (
-                                <DropdownMenuItem key={index} className="text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50">
-                                  {subtype}
-                                </DropdownMenuItem>
-                              ))}
-                            </DropdownMenuSubContent>
-                          </DropdownMenuSub>
-                        ))}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
+              <MainNavigation mainNavItems={mainNavItems} />
             </div>
 
             {/* Search and Actions */}
@@ -227,59 +137,11 @@ const Navigation = () => {
           </div>
 
           {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <div className="lg:hidden py-4 border-t border-slate-700/50 bg-slate-950/95 backdrop-blur-xl rounded-b-lg">
-              <div className="flex flex-col space-y-3">
-                {mainNavItems.map((item) => (
-                  <div key={item.label}>
-                    {item.to ? (
-                      <Link
-                        to={item.to}
-                        className="text-slate-300 hover:text-cyan-400 font-medium py-2 block transition-colors duration-300 flex items-center space-x-2"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {item.icon}
-                        <span>{item.label}</span>
-                      </Link>
-                    ) : (
-                      <>
-                        <a
-                          href={item.href}
-                          className="text-slate-300 hover:text-cyan-400 font-medium py-2 block transition-colors duration-300 flex items-center space-x-2"
-                        >
-                          {item.icon}
-                          <span>{item.label}</span>
-                        </a>
-                        {item.subitems && (
-                          <div className="ml-6 mt-2 space-y-2">
-                            {item.subitems.map((subitem) => (
-                              <a
-                                key={subitem.label}
-                                href={subitem.href}
-                                className="text-slate-400 hover:text-cyan-400 text-sm py-1 block transition-colors duration-300"
-                              >
-                                {subitem.label}
-                              </a>
-                            ))}
-                          </div>
-                        )}
-                      </>
-                    )}
-                  </div>
-                ))}
-                <div className="pt-4 border-t border-slate-700/50">
-                  <Input
-                    type="search"
-                    placeholder="Search..."
-                    className="mb-3 bg-slate-800/50 border-slate-600 text-slate-200 placeholder-slate-400 rounded-lg"
-                  />
-                  <Button className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-medium rounded-lg">
-                    Subscribe
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
+          <MobileNavigation 
+            mainNavItems={mainNavItems}
+            isMenuOpen={isMenuOpen}
+            setIsMenuOpen={setIsMenuOpen}
+          />
         </div>
       </nav>
 
