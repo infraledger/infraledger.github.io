@@ -1,5 +1,5 @@
-
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Search, Menu, Bell, TrendingUp, ChevronDown, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,10 +57,10 @@ const Navigation = () => {
         { label: "Emerging Markets", href: "#emerging" }
       ]
     },
-    { label: "Events", href: "#events" },
+    { label: "Events", to: "/events" }, // <-- route to /events page
     { 
       label: "Community", 
-      href: "/community",
+      to: "/community",
       icon: <Users className="h-4 w-4" />
     }
   ];
@@ -142,6 +142,14 @@ const Navigation = () => {
                             </div>
                           </NavigationMenuContent>
                         </>
+                      ) : item.to ? (
+                        <Link
+                          to={item.to}
+                          className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-4 flex items-center space-x-1 transition-all duration-300 hover:bg-slate-800/50 rounded-lg border border-transparent hover:border-cyan-500/30"
+                        >
+                          {item.icon}
+                          <span>{item.label}</span>
+                        </Link>
                       ) : (
                         <a
                           href={item.href}
@@ -224,25 +232,38 @@ const Navigation = () => {
               <div className="flex flex-col space-y-3">
                 {mainNavItems.map((item) => (
                   <div key={item.label}>
-                    <a
-                      href={item.href}
-                      className="text-slate-300 hover:text-cyan-400 font-medium py-2 block transition-colors duration-300 flex items-center space-x-2"
-                    >
-                      {item.icon}
-                      <span>{item.label}</span>
-                    </a>
-                    {item.subitems && (
-                      <div className="ml-6 mt-2 space-y-2">
-                        {item.subitems.map((subitem) => (
-                          <a
-                            key={subitem.label}
-                            href={subitem.href}
-                            className="text-slate-400 hover:text-cyan-400 text-sm py-1 block transition-colors duration-300"
-                          >
-                            {subitem.label}
-                          </a>
-                        ))}
-                      </div>
+                    {item.to ? (
+                      <Link
+                        to={item.to}
+                        className="text-slate-300 hover:text-cyan-400 font-medium py-2 block transition-colors duration-300 flex items-center space-x-2"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.icon}
+                        <span>{item.label}</span>
+                      </Link>
+                    ) : (
+                      <>
+                        <a
+                          href={item.href}
+                          className="text-slate-300 hover:text-cyan-400 font-medium py-2 block transition-colors duration-300 flex items-center space-x-2"
+                        >
+                          {item.icon}
+                          <span>{item.label}</span>
+                        </a>
+                        {item.subitems && (
+                          <div className="ml-6 mt-2 space-y-2">
+                            {item.subitems.map((subitem) => (
+                              <a
+                                key={subitem.label}
+                                href={subitem.href}
+                                className="text-slate-400 hover:text-cyan-400 text-sm py-1 block transition-colors duration-300"
+                              >
+                                {subitem.label}
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
                 ))}
