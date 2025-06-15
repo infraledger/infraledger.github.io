@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -13,6 +12,15 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 // Lazy-load Mapbox GL JS since it's a large module and only needed here
 const MapboxMap = React.lazy(() => import("../utils/MapboxMap"));
+
+type Project = {
+  name: string;
+  coords: [number, number];
+  sector: string;
+  region: string;
+  status: string;
+  investment: string;
+};
 
 const infrastructureSectors = [
   "Transport",
@@ -35,7 +43,8 @@ const regions = [
   "Latin America"
 ];
 
-const demoProjects = [
+// Explicitly type as Project[] for correct tuple annotation
+const demoProjects: Project[] = [
   { name: "Green Bridge", coords: [2.35, 48.85], sector: "Transport", region: "Europe", status: "Under Construction", investment: "$2B" }, // Paris
   { name: "Solar Oasis", coords: [55.27, 25.20], sector: "Energy", region: "Middle East & Africa", status: "Planning", investment: "$820M" }, // Dubai
   { name: "Pacific Fiber", coords: [151.2, -33.8], sector: "Digital Infra", region: "Asia-Pacific", status: "Operational", investment: "$1.3B" }, // Sydney
