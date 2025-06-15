@@ -1,10 +1,10 @@
-
 import ThreadedDiscussion from "./ThreadedDiscussion";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { MessageCircle, TrendingUp, Filter, ChevronDown } from "lucide-react";
+import { MessageCircle, TrendingUp, Filter, ChevronDown, Plus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/sonner";
 
 const CATEGORIES = [
   "Energy",
@@ -94,11 +94,48 @@ const exampleDiscussions = [
     lastActivity: "17m ago",
     trending: true,
   },
+  {
+    id: 8,
+    title: "How to break into infra project finance?",
+    sector: "Energy",
+    author: "Ayesha Gupta",
+    verified: false,
+    upvotes: 15,
+    replies: 6,
+    lastActivity: "just now",
+    trending: false,
+  },
+  {
+    id: 9,
+    title: "Telecom resiliency: what worked in the Manila floods",
+    sector: "Telecom",
+    author: "Samuel Tan",
+    verified: true,
+    upvotes: 39,
+    replies: 3,
+    lastActivity: "10m ago",
+    trending: false,
+  },
+  {
+    id: 10,
+    title: "What are the best climate tech resources?",
+    sector: "Other",
+    author: "Meena Wolff",
+    verified: false,
+    upvotes: 24,
+    replies: 2,
+    lastActivity: "15m ago",
+    trending: false,
+  },
 ];
 
 const ForumSection = () => {
   const [category, setCategory] = useState<string | null>(null);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // Placeholder: Not signed in disables creation/posting
+  const IS_AUTH = false;
 
   // Only show filtered and/or searched results for demo
   const filtered =
@@ -110,6 +147,20 @@ const ForumSection = () => {
         d.title.toLowerCase().includes(search.toLowerCase())
       )
     : filtered;
+
+  const handleNewThread = () => {
+    if (!IS_AUTH) {
+      toast("Sign in required", {
+        description: "Please sign in to post a new discussion.",
+      });
+      return;
+    }
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      toast("Demo: Thread posted!", { description: "Your new discussion is created (placeholder)." });
+    }, 1200);
+  };
 
   return (
     <div>
@@ -129,9 +180,7 @@ const ForumSection = () => {
               key={cat}
               size="sm"
               variant={cat === category ? "default" : "outline"}
-              className={`text-xs px-3 ${
-                cat === category ? "bg-cyan-600 text-white" : ""
-              }`}
+              className={`text-xs px-3 ${cat === category ? "bg-cyan-600 text-white" : ""}`}
               onClick={() => setCategory(cat)}
             >
               {cat}
@@ -150,58 +199,91 @@ const ForumSection = () => {
           <Filter className="h-4 w-4 mr-1" />
           Filter
         </Button>
+        <Button
+          size="sm"
+          className="ml-2 bg-cyan-700 hover:bg-cyan-800 text-white flex items-center"
+          onClick={handleNewThread}
+          disabled={!IS_AUTH || loading}
+          title={IS_AUTH ? "Post a new discussion" : "Sign in to post"}
+        >
+          <Plus className="h-4 w-4 mr-1" />
+          New Thread
+        </Button>
       </div>
 
       {/* List of discussions */}
       <div className="space-y-4">
-        {searched.map((disc) => (
-          <div
-            key={disc.id}
-            className={`rounded-lg border border-slate-700/50 bg-slate-800/40 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4 group hover:bg-slate-800/70 transition-all duration-200 ${
-              disc.trending ? "ring-2 ring-cyan-500/30" : ""
-            }`}
-          >
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30 text-xs px-2 py-0.5">
-                  {disc.sector}
-                </Badge>
-                {disc.trending && (
-                  <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/30 text-xs">
-                    <TrendingUp className="h-3 w-3 mr-1" />
-                    Trending
+        {searched.length === 0 ? (
+          <div className="py-12 text-center text-slate-400">
+            <div className="mb-2 text-xl">No discussions found</div>
+            <Button
+              size="sm"
+              className="bg-cyan-700 text-white"
+              onClick={() => {
+                setCategory(null);
+                setSearch("");
+              }}
+            >
+              Reset Filters
+            </Button>
+          </div>
+        ) : (
+          searched.map((disc) => (
+            <div
+              key={disc.id}
+              className={`rounded-lg border border-slate-700/50 bg-slate-800/40 px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4 group hover:bg-slate-800/70 transition-all duration-200 ${disc.trending ? "ring-2 ring-cyan-500/30" : ""
+                }`}
+            >
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30 text-xs px-2 py-0.5">
+                    {disc.sector}
                   </Badge>
-                )}
-              </div>
-              <h3 className="font-semibold text-white hover:text-cyan-400 transition-colors">
-                {disc.title}
-              </h3>
-              <div className="flex items-center text-slate-400 text-xs gap-2 mt-1">
-                <span>
-                  {disc.author}
-                  {disc.verified && (
-                    <Badge className="ml-1 bg-blue-500/20 text-blue-400 border-blue-500/30 text-xxs">
-                      Verified
+                  {disc.trending && (
+                    <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/30 text-xs">
+                      <TrendingUp className="h-3 w-3 mr-1" />
+                      Trending
                     </Badge>
                   )}
+                </div>
+                <h3 className="font-semibold text-white hover:text-cyan-400 transition-colors">
+                  {disc.title}
+                </h3>
+                <div className="flex items-center text-slate-400 text-xs gap-2 mt-1">
+                  <span>
+                    {disc.author}
+                    {disc.verified && (
+                      <Badge className="ml-1 bg-blue-500/20 text-blue-400 border-blue-500/30 text-xxs">
+                        Verified
+                      </Badge>
+                    )}
+                  </span>
+                  <span>· {disc.lastActivity}</span>
+                </div>
+              </div>
+              <div className="flex gap-5 items-center self-end sm:self-auto">
+                <span className="flex items-center text-green-400 text-xs font-semibold">
+                  ▲ {disc.upvotes}
                 </span>
-                <span>· {disc.lastActivity}</span>
+                <span className="flex items-center text-slate-400 text-xs">
+                  <MessageCircle className="h-4 w-4 mr-1" />
+                  {disc.replies}
+                </span>
+                <Button
+                  variant="secondary"
+                  className="text-xs px-2 py-1"
+                  onClick={() =>
+                    toast("Thread view", {
+                      description: "Placeholder for threaded view modal.",
+                    })
+                  }
+                >
+                  View Thread
+                </Button>
               </div>
             </div>
-            <div className="flex gap-5 items-center self-end sm:self-auto">
-              <span className="flex items-center text-green-400 text-xs font-semibold">
-                ▲ {disc.upvotes}
-              </span>
-              <span className="flex items-center text-slate-400 text-xs">
-                <MessageCircle className="h-4 w-4 mr-1" />
-                {disc.replies}
-              </span>
-              <Button variant="secondary" className="text-xs px-2 py-1">
-                View Thread
-              </Button>
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       {/* Stubs for threading/voting */}

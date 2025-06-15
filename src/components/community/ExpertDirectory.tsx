@@ -1,9 +1,9 @@
-
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Award, Search, Briefcase } from "lucide-react";
+import { Award, Search, Briefcase, UserPlus, Mail } from "lucide-react";
+import { toast } from "@/components/ui/sonner";
 
 const sampleExperts = [
   {
@@ -86,10 +86,36 @@ const sampleExperts = [
     expertise: ["Water Digital Twins", "GIS Integration"],
     verified: false,
   },
+  {
+    id: 11,
+    name: "Ayesha Kumar",
+    title: "Port Engineer",
+    company: "Mumbai Ports Authority",
+    expertise: ["Harbor Design", "Coastal Infra"],
+    verified: false,
+  },
+  {
+    id: 12,
+    name: "Samuel Tan",
+    title: "Disaster Response Director",
+    company: "Manila Government",
+    expertise: ["Crisis Planning", "Telecom Resilience"],
+    verified: true,
+  },
+  {
+    id: 13,
+    name: "Meena Wolff",
+    title: "Climate Policy Researcher",
+    company: "TU Berlin",
+    expertise: ["Climate Finance", "Decarbonization"],
+    verified: false,
+  },
 ];
 
 const ExpertDirectory = () => {
   const [search, setSearch] = useState("");
+  // Simulate logged-in state for demo
+  const IS_AUTH = false;
 
   const filtered = search
     ? sampleExperts.filter(
@@ -99,6 +125,28 @@ const ExpertDirectory = () => {
           ex.expertise.some((tag) => tag.toLowerCase().includes(search.toLowerCase()))
       )
     : sampleExperts;
+
+  const handleConnect = (name: string) => {
+    if (!IS_AUTH) {
+      toast("Sign in required", { description: "Please log in to send a connection request." });
+      return;
+    }
+    toast("Request sent", { description: `Connection requested from ${name} (demo)` });
+  };
+  const handleAsk = (name: string) => {
+    if (!IS_AUTH) {
+      toast("Sign in required", { description: "Please log in to ask questions." });
+      return;
+    }
+    toast("Q&A started", { description: `Started a thread with ${name} (demo)` });
+  };
+  const handleBook = (name: string) => {
+    if (!IS_AUTH) {
+      toast("Sign in required", { description: "Please log in to book a consult." });
+      return;
+    }
+    toast("Booked (DEMO)", { description: `Consult booking (placeholder) with ${name}` });
+  };
 
   return (
     <section>
@@ -114,59 +162,92 @@ const ExpertDirectory = () => {
         </div>
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
-        {filtered.map((expert) => (
-          <div
-            key={expert.id}
-            className={`rounded-lg border border-slate-700/50 bg-slate-800/40 px-5 py-5 hover:bg-slate-800/70 transition-all`}
-          >
-            <div className="flex gap-4 items-center mb-2">
-              <div className="rounded-full h-12 w-12 bg-cyan-900 flex items-center justify-center font-bold text-lg text-cyan-300">
-                {expert.name.split(" ").map((n) => n[0]).join("")}
-              </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-white">{expert.name}</span>
-                  {expert.verified && (
-                    <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 text-xs flex items-center gap-1">
-                      <Award className="h-3 w-3" />
-                      Verified
-                    </Badge>
-                  )}
-                </div>
-                <span className="text-slate-400 text-xs">{expert.title}</span>
-                <span className="text-slate-500 text-xs flex items-center gap-1">
-                  <Briefcase className="h-3 w-3" /> {expert.company}
-                </span>
-              </div>
-            </div>
-            <div className="pt-2 mb-3">
-              <span className="text-xs text-slate-500 mb-1">Expertise:</span>
-              <div className="flex flex-wrap gap-1 mt-1">
-                {expert.expertise.map((skill, idx) => (
-                  <Badge key={idx} variant="outline" className="text-xs border-slate-600 text-slate-400">
-                    {skill}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-            <div className="mt-2 flex gap-2">
-              <Button variant="outline" className="text-xs px-3 border-slate-700">
-                Ask
-              </Button>
-              <Button variant="secondary" className="text-xs px-3">
-                Connect
-              </Button>
-              {expert.verified && (
-                <Button className="text-xs px-3 bg-gradient-to-r from-cyan-700 to-blue-700 text-white">
-                  Book Consult
-                </Button>
-              )}
-            </div>
+        {filtered.length === 0 ? (
+          <div className="col-span-full py-12 text-center text-slate-400">
+            <div className="mb-2 text-xl">No experts found</div>
+            <Button
+              size="sm"
+              className="bg-cyan-700 text-white"
+              onClick={() => setSearch("")}
+            >
+              Reset Search
+            </Button>
           </div>
-        ))}
+        ) : (
+          filtered.map((expert) => (
+            <div
+              key={expert.id}
+              className={`rounded-lg border border-slate-700/50 bg-slate-800/40 px-5 py-5 hover:bg-slate-800/70 transition-all`}
+            >
+              <div className="flex gap-4 items-center mb-2">
+                <div className="rounded-full h-12 w-12 bg-cyan-900 flex items-center justify-center font-bold text-lg text-cyan-300">
+                  {/* Placeholder initials + user emoji for vibrancy */}
+                  <span className="mr-1">{String.fromCodePoint(0x1F464 + (expert.id % 5))}</span>
+                  {expert.name.split(" ").map((n) => n[0]).join("")}
+                </div>
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-white">{expert.name}</span>
+                    {expert.verified && (
+                      <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 text-xs flex items-center gap-1">
+                        <Award className="h-3 w-3" />
+                        Verified
+                      </Badge>
+                    )}
+                  </div>
+                  <span className="text-slate-400 text-xs">{expert.title}</span>
+                  <span className="text-slate-500 text-xs flex items-center gap-1">
+                    <Briefcase className="h-3 w-3" /> {expert.company}
+                  </span>
+                </div>
+              </div>
+              <div className="pt-2 mb-3">
+                <span className="text-xs text-slate-500 mb-1">Expertise:</span>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {expert.expertise.map((skill, idx) => (
+                    <Badge key={idx} variant="outline" className="text-xs border-slate-600 text-slate-400">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-2 flex gap-2">
+                <Button
+                  variant="outline"
+                  className="text-xs px-3 border-slate-700"
+                  disabled={!IS_AUTH}
+                  onClick={() => handleAsk(expert.name)}
+                  title={IS_AUTH ? "Ask a question" : "Sign in to ask"}
+                >
+                  Ask
+                </Button>
+                <Button
+                  variant="secondary"
+                  className="text-xs px-3"
+                  disabled={!IS_AUTH}
+                  onClick={() => handleConnect(expert.name)}
+                  title={IS_AUTH ? "Connect" : "Sign in to connect"}
+                >
+                  <UserPlus className="h-3 w-3 mr-1" />
+                  Connect
+                </Button>
+                {expert.verified && (
+                  <Button
+                    className="text-xs px-3 bg-gradient-to-r from-cyan-700 to-blue-700 text-white"
+                    disabled={!IS_AUTH}
+                    onClick={() => handleBook(expert.name)}
+                    title={IS_AUTH ? "Book consult" : "Sign in to book"}
+                  >
+                    Book Consult
+                  </Button>
+                )}
+              </div>
+            </div>
+          ))
+        )}
       </div>
       <div className="mt-8 text-sm text-cyan-400">
-        Tip: Click "Ask" to start an expert Q&amp;A thread. "Book Consult" is for private sessions.
+        Tip: Click "Ask" for expert Q&A. "Book Consult" is demo-only; sign in to unlock actions.
       </div>
     </section>
   );
