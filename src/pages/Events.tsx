@@ -1,5 +1,7 @@
 
 import { useState } from "react";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import EventCard from "@/components/events/EventCard";
 import { Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -114,8 +116,9 @@ export default function EventsPage() {
     : EVENTS;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 px-0 pb-12 pt-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex flex-col">
+      <Navigation />
+      <main className="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">
         <div className="flex flex-col md:flex-row md:items-end gap-4 md:gap-10 mb-8">
           <div>
             <h1 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-cyan-400 via-blue-400 to-blue-200 bg-clip-text text-transparent mb-2">
@@ -180,7 +183,8 @@ export default function EventsPage() {
             <div className="text-slate-400 max-w-md mx-auto">Interactive event calendar integration is in progress. For now, explore all events in the list view above!</div>
           </div>
         )}
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 }
