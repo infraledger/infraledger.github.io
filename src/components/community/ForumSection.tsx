@@ -17,7 +17,6 @@ const CATEGORIES = [
 ];
 
 const exampleDiscussions = [
-  // top-level only for demo; ThreadedDiscussion would manage hierarchy
   {
     id: 1,
     title: "Scaling Green Hydrogen Infrastructure: Lessons Learned",
@@ -39,6 +38,61 @@ const exampleDiscussions = [
     replies: 19,
     lastActivity: "4h ago",
     trending: false,
+  },
+  {
+    id: 3,
+    title: "Digital Twins for Water Utilities",
+    sector: "Water",
+    author: "Javier Morales",
+    verified: false,
+    upvotes: 51,
+    replies: 6,
+    lastActivity: "35m ago",
+    trending: true,
+  },
+  {
+    id: 4,
+    title: "PPP Models in Social Infrastructure",
+    sector: "Social Infra",
+    author: "Dr. Maria Santos",
+    verified: true,
+    upvotes: 34,
+    replies: 3,
+    lastActivity: "12m ago",
+    trending: false,
+  },
+  {
+    id: 5,
+    title: "Resilient Telecom: Strategies After Natural Disasters",
+    sector: "Telecom",
+    author: "Arjun Patel",
+    verified: false,
+    upvotes: 71,
+    replies: 10,
+    lastActivity: "28m ago",
+    trending: true,
+  },
+  {
+    id: 6,
+    title: "Urban Waste Management: Circular Approaches",
+    sector: "Waste",
+    author: "Lina Becker",
+    verified: false,
+    upvotes: 12,
+    replies: 1,
+    lastActivity: "1h ago",
+    trending: false,
+  },
+  {
+    id: 7,
+    title: "AI and Big Data in Infrastructure Asset Management",
+    sector: "Other",
+    author: "Prof. Anna Petrov",
+    verified: true,
+    upvotes: 92,
+    replies: 15,
+    lastActivity: "17m ago",
+    trending: true,
   },
 ];
 

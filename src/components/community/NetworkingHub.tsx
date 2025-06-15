@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Users, Briefcase, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,6 +16,30 @@ const connections = [
     company: "TransInfra Group",
     common: 5,
   },
+  {
+    id: 3,
+    name: "David Kim",
+    company: "Singapore Sovereign Wealth Fund",
+    common: 2,
+  },
+  {
+    id: 4,
+    name: "Nina Lee",
+    company: "CleanLoop Europe",
+    common: 4,
+  },
+  {
+    id: 5,
+    name: "Carlos Martin",
+    company: "Veolia France",
+    common: 1,
+  },
+  {
+    id: 6,
+    name: "Javier Morales",
+    company: "AquaSmart Analytics",
+    common: 2,
+  },
 ];
 
 const companies = [
@@ -31,6 +54,36 @@ const companies = [
     name: "TransInfra Group",
     sector: "Transport",
     members: 37,
+  },
+  {
+    id: 3,
+    name: "CleanLoop Europe",
+    sector: "Waste",
+    members: 12,
+  },
+  {
+    id: 4,
+    name: "BruClean India",
+    sector: "Waste",
+    members: 9,
+  },
+  {
+    id: 5,
+    name: "HydroCore Global",
+    sector: "Energy",
+    members: 14,
+  },
+  {
+    id: 6,
+    name: "AquaSmart Analytics",
+    sector: "Water",
+    members: 7,
+  },
+  {
+    id: 7,
+    name: "Infowave South Asia",
+    sector: "Telecom",
+    members: 18,
   },
 ];
 
