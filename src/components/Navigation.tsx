@@ -44,7 +44,7 @@ const Navigation = () => {
     },
     { 
       label: "Data & Intelligence", 
-      href: "#data",
+      to: "/data-intelligence",
       subitems: [
         { label: "Project Tracker", href: "#projects" },
         { label: "Company Directory", href: "#companies" },
