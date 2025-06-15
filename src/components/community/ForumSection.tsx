@@ -5,6 +5,7 @@ import { MessageCircle, TrendingUp, Filter, ChevronDown, Plus } from "lucide-rea
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/sonner";
+import NewThreadDrawer from "./NewThreadDrawer";
 
 const CATEGORIES = [
   "Energy",
@@ -134,6 +135,8 @@ const ForumSection = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Drawer open state for new thread form
+  const [drawerOpen, setDrawerOpen] = useState(false);
   // Placeholder: Not signed in disables creation/posting
   const IS_AUTH = false;
 
@@ -147,20 +150,6 @@ const ForumSection = () => {
         d.title.toLowerCase().includes(search.toLowerCase())
       )
     : filtered;
-
-  const handleNewThread = () => {
-    if (!IS_AUTH) {
-      toast("Sign in required", {
-        description: "Please sign in to post a new discussion.",
-      });
-      return;
-    }
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      toast("Demo: Thread posted!", { description: "Your new discussion is created (placeholder)." });
-    }, 1200);
-  };
 
   return (
     <div>
@@ -202,15 +191,14 @@ const ForumSection = () => {
         <Button
           size="sm"
           className="ml-2 bg-cyan-700 hover:bg-cyan-800 text-white flex items-center"
-          onClick={handleNewThread}
-          disabled={!IS_AUTH || loading}
+          onClick={() => setDrawerOpen(true)}
+          disabled={loading}
           title={IS_AUTH ? "Post a new discussion" : "Sign in to post"}
         >
           <Plus className="h-4 w-4 mr-1" />
           New Thread
         </Button>
       </div>
-
       {/* List of discussions */}
       <div className="space-y-4">
         {searched.length === 0 ? (
@@ -285,11 +273,12 @@ const ForumSection = () => {
           ))
         )}
       </div>
-
       {/* Stubs for threading/voting */}
       <div className="mt-8">
         <ThreadedDiscussion />
       </div>
+      {/* Drawer for creating a new thread */}
+      <NewThreadDrawer open={drawerOpen} onOpenChange={setDrawerOpen} />
     </div>
   );
 };
