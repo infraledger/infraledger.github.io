@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -50,10 +49,10 @@ const MainNavigation = ({ mainNavItems }: MainNavigationProps) => (
                         Project Tracker
                       </Link>
                       <Link
-                        to="/data-intelligence/companies"
+                        to="/data-intelligence/global-map"
                         className="block px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-md transition-all duration-300 border border-transparent hover:border-cyan-500/30"
                       >
-                        Company Directory
+                        Global Infrastructure Map
                       </Link>
                       <Link
                         to="/data-intelligence/financials"
@@ -139,4 +138,3 @@ const MainNavigation = ({ mainNavItems }: MainNavigationProps) => (
 );
 
 export default MainNavigation;
-
