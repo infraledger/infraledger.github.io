@@ -2,6 +2,7 @@
 import React from "react";
 import { Table, TableHead, TableBody, TableRow, TableCell, TableHeader } from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import StatusBadge from "./StatusBadge";
 
 const rows = [
   {
@@ -42,6 +43,9 @@ const rows = [
   }
 ];
 
+// Skeleton loading state, could be replaced or enhanced later
+const isLoading = false;
+
 const InvestmentTable: React.FC = () => (
   <Card className="bg-slate-900/80 border-slate-700/50 rounded-xl shadow h-full">
     <CardHeader>
@@ -62,22 +66,35 @@ const InvestmentTable: React.FC = () => (
             </TableRow>
           </TableHeader>
           <TableBody>
-            {rows.map((row, idx) => (
-              <TableRow key={idx}>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>{row.sector}</TableCell>
-                <TableCell>{row.region}</TableCell>
-                <TableCell>{row.size}</TableCell>
-                <TableCell>{row.irr}</TableCell>
-                <TableCell>{row.risk}</TableCell>
-                <TableCell>{row.status}</TableCell>
+            {isLoading ? (
+              <TableRow>
+                <TableCell colSpan={7}>
+                  <div className="h-8 w-full animate-pulse bg-slate-800 rounded" />
+                </TableCell>
               </TableRow>
-            ))}
+            ) : (
+              rows.map((row, idx) => (
+                <TableRow className="transition hover:bg-slate-800/60" key={idx}>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell>{row.sector}</TableCell>
+                  <TableCell>{row.region}</TableCell>
+                  <TableCell>{row.size}</TableCell>
+                  <TableCell>{row.irr}</TableCell>
+                  <TableCell>
+                    <span className={`font-semibold text-xs ${row.risk.startsWith("A") ? "text-green-400" : "text-yellow-300"}`}>
+                      {row.risk}
+                    </span>
+                  </TableCell>
+                  <TableCell>
+                    <StatusBadge status={row.status} />
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </div>
     </CardContent>
   </Card>
 );
-
 export default InvestmentTable;

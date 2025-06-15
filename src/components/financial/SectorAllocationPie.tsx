@@ -19,15 +19,27 @@ const SectorAllocationPie: React.FC = () => (
       <CardTitle className="text-base text-cyan-300">Sector Allocation (%)</CardTitle>
     </CardHeader>
     <CardContent className="pt-0">
-      <div className="h-48">
+      <div className="h-60 md:h-48 animate-fade-in">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
-            <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={32} outerRadius={60} fill="#8884d8" label>
+            <Pie
+              data={data}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              innerRadius={32}
+              outerRadius={60}
+              fill="#8884d8"
+              label
+              isAnimationActive
+              animationDuration={950}
+            >
               {data.map((entry, idx) => (
                 <Cell key={`cell-${entry.name}`} fill={COLORS[idx % COLORS.length]} />
               ))}
             </Pie>
-            <Tooltip />
+            <Tooltip contentStyle={{ background: "#1e293b", border: "1px solid #334155", color: "#fff" }} />
             <Legend />
           </PieChart>
         </ResponsiveContainer>

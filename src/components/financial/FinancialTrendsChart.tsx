@@ -25,14 +25,14 @@ const FinancialTrendsChart: React.FC = () => (
       <CardTitle className="text-base text-cyan-300">Investment Flow Timeline</CardTitle>
     </CardHeader>
     <CardContent className="pt-0">
-      <div className="h-48">
+      <div className="h-60 md:h-48 animate-fade-in">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
             <CartesianGrid stroke="#334155" strokeDasharray="5 3" />
             <XAxis dataKey="quarter" tick={{fill:"#64748b"}} />
             <YAxis tick={{fill:"#64748b"}} />
-            <Tooltip />
-            <Line type="monotone" dataKey="value" stroke="#06b6d4" strokeWidth={3} dot={{ r: 4, fill: "#22d3ee" }} />
+            <Tooltip contentStyle={{ background: "#1e293b", border: "1px solid #334155", color: "#fff" }} />
+            <Line type="monotone" dataKey="value" stroke="#06b6d4" strokeWidth={3} dot={{ r: 4, fill: "#22d3ee" }} isAnimationActive animationDuration={900}/>
           </LineChart>
         </ResponsiveContainer>
       </div>
