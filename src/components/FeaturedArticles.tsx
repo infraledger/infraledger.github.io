@@ -3,8 +3,18 @@ import { Clock, User, TrendingUp, MapPin, DollarSign, Calendar, ArrowRight, Star
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const FeaturedArticles = () => {
+  const { toast } = useToast();
+
+  const handleArticleClick = (article: any) => {
+    toast({
+      title: `Opening: ${article.title}`,
+      description: `This is a placeholder. Article ID: ${article.id}`,
+    });
+  };
+
   const featuredNews = [
     {
       id: 1,
@@ -175,7 +185,10 @@ const FeaturedArticles = () => {
                     </div>
                   </div>
                 </div>
-                <Button className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold shadow-lg border border-cyan-500/30 transition-all duration-300">
+                <Button 
+                  onClick={() => handleArticleClick(featuredNews[0])}
+                  className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold shadow-lg border border-cyan-500/30 transition-all duration-300"
+                >
                   Read Full Analysis
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -224,7 +237,11 @@ const FeaturedArticles = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredNews.slice(1).map((article) => (
-              <Card key={article.id} className="bg-slate-800/30 border-slate-700/50 backdrop-blur-lg hover:bg-slate-800/40 transition-all duration-300 group cursor-pointer">
+              <Card 
+                key={article.id} 
+                onClick={() => handleArticleClick(article)}
+                className="bg-slate-800/30 border-slate-700/50 backdrop-blur-lg hover:bg-slate-800/40 transition-all duration-300 group cursor-pointer"
+              >
                 <div className="relative overflow-hidden rounded-t-lg">
                   <img 
                     src={article.image}
