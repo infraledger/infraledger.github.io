@@ -4,18 +4,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const FeaturedArticles = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState("All News");
 
   const handleArticleClick = (article: any) => {
-    toast({
-      title: `Opening: ${article.title}`,
-      description: `This is a placeholder. Article ID: ${article.id}`,
-    });
+    navigate(`/news/${article.id}`);
   };
 
   const allNews = [

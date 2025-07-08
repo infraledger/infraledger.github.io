@@ -10,6 +10,7 @@ import ProjectTracker from "./pages/ProjectTracker";
 import FinancialData from "./pages/FinancialData";
 import ThematicDashboards from "./pages/ThematicDashboards";
 import GlobalInfrastructureMap from "./pages/GlobalInfrastructureMap";
+import NewsArticle from "./pages/NewsArticle";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/data-intelligence/global-map" element={<GlobalInfrastructureMap />} />
           <Route path="/data-intelligence/financials" element={<FinancialData />} />
           <Route path="/data-intelligence/themes" element={<ThematicDashboards />} />
+          <Route path="/news/:id" element={<NewsArticle />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
