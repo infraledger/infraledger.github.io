@@ -199,6 +199,27 @@ const MarketAnalysis = () => {
     ? newsArticles 
     : newsArticles.filter(article => article.category === selectedCategory);
 
+  const marketHighlights = [
+    {
+      title: "Accelerating Investment in Sustainable Energy Infrastructure",
+      description: "A significant surge in capital commitments for renewable energy components crucial to grid modernization and decarbonization, including large-scale BESS and green hydrogen production.",
+      trend: "+24.5%",
+      color: "text-green-400"
+    },
+    {
+      title: "Modernizing Aging Transport Networks",
+      description: "Global infrastructure efforts balance urgent repairs of existing systems with strategic ambitions for transformational mega-projects and connectivity hubs.",
+      trend: "+18.2%",
+      color: "text-blue-400"
+    },
+    {
+      title: "Policy Frameworks Create Investment Volatility",
+      description: "Despite robust market interest, policy shifts and regulatory hurdles continue to influence investment decisions and project timelines across sectors.",
+      trend: "-3.1%",
+      color: "text-orange-400"
+    }
+  ];
+
   const marketTrends = [
     {
       title: "Green Infrastructure Investment",
@@ -343,6 +364,24 @@ const MarketAnalysis = () => {
                 Digital and renewable energy infrastructure expected to dominate investment flows through 2025.
               </CardContent>
             </Card>
+          </div>
+        </section>
+
+        {/* Market Highlights */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-white mb-6">Daily Market Analysis</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {marketHighlights.map((highlight, index) => (
+              <Card key={index} className="bg-slate-900/70 border-slate-700/50">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <h4 className="font-semibold text-white leading-tight">{highlight.title}</h4>
+                    <span className={`text-sm font-bold ${highlight.color}`}>{highlight.trend}</span>
+                  </div>
+                  <p className="text-slate-400 text-sm leading-relaxed">{highlight.description}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </section>
 

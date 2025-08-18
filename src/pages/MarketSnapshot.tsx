@@ -29,33 +29,71 @@ const MarketSnapshot = () => {
 
   const marketMetrics = [
     {
-      title: "Total Transaction Volume",
-      value: "$2.84T",
-      change: "+12.4%",
-      icon: DollarSign,
-      color: "text-green-400"
-    },
-    {
       title: "Active Projects",
-      value: "15,647",
-      change: "+8.7%",
+      value: "2,847",
+      change: "+12.3%",
       icon: Building,
       color: "text-cyan-400"
     },
     {
-      title: "Global Markets",
-      value: "156",
+      title: "Total Investment",
+      value: "$2.8T",
+      change: "+8.7%",
+      icon: DollarSign,
+      color: "text-green-400"
+    },
+    {
+      title: "Green Projects",
+      value: "68%",
+      change: "+15.2%",
+      icon: TrendingUp,
+      color: "text-emerald-400"
+    },
+    {
+      title: "Completion Rate",
+      value: "94.2%",
       change: "+2.1%",
       icon: Globe,
       color: "text-blue-400"
-    },
-    {
-      title: "Average Deal Size",
-      value: "$181M",
-      change: "+15.3%",
-      icon: TrendingUp,
-      color: "text-purple-400"
     }
+  ];
+
+  const liveMarketData = [
+    { label: "Global Infra Index", value: "+2.4%", color: "text-green-400" },
+    { label: "Green Bond Yield", value: "3.2%", color: "text-cyan-400" },
+    { label: "Project Pipeline", value: "$1.2T", color: "text-white" },
+    { label: "ESG Compliance", value: "87%", color: "text-purple-400" },
+  ];
+
+  const topPerformingCompanies = [
+    { 
+      name: "Adani Green Energy", 
+      sector: "Renewable Energy", 
+      market: "India",
+      change: "+12.3%",
+      trend: "up"
+    },
+    { 
+      name: "OMV Aktiengesellschaft", 
+      sector: "Energy Transition", 
+      market: "Austria",
+      change: "+8.7%",
+      trend: "up"
+    },
+    { 
+      name: "Air Products", 
+      sector: "Hydrogen", 
+      market: "USA",
+      change: "+15.2%",
+      trend: "up"
+    },
+    { 
+      name: "Grenergy Renovables", 
+      sector: "Solar/Storage", 
+      market: "Spain",
+      change: "+22.1%",
+      trend: "up"
+    },
   ];
 
   const regionalData = [
@@ -169,6 +207,52 @@ const MarketSnapshot = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Live Market Data */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <Card className="bg-slate-900/70 border-slate-700/50">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <DollarSign className="h-5 w-5 text-cyan-400" />
+                Live Market Data
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {liveMarketData.map((item, index) => (
+                  <div key={index} className="flex justify-between items-center p-3 bg-slate-800/50 rounded-lg">
+                    <span className="text-slate-300 font-medium">{item.label}</span>
+                    <span className={`font-bold text-lg ${item.color}`}>
+                      {item.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-slate-900/70 border-slate-700/50">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-green-400" />
+                Top Performing Companies
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {topPerformingCompanies.map((company, index) => (
+                  <div key={index} className="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800/70 transition-colors">
+                    <div>
+                      <div className="text-white font-medium text-sm">{company.name}</div>
+                      <div className="text-slate-400 text-xs">{company.sector} • {company.market}</div>
+                    </div>
+                    <div className="text-green-400 font-semibold text-sm">{company.change}</div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">

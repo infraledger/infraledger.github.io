@@ -8,83 +8,140 @@ import { Button } from "@/components/ui/button";
 
 // Dummy data for placeholder events
 const EVENTS = [
-  {
+  { 
     id: 1,
-    title: "Global Infrastructure Leaders Summit",
-    date: "2025-07-10",
-    location: "London, UK",
+    date: "Jun 25-26, 2025", 
+    title: "Solar & Storage Live Valencia", 
+    location: "Valencia, Spain",
     type: "Conference",
     category: "Conferences & Summits",
-    img: "/photo-1605810230434-7631ac76ec81.jpg",
-    speakers: [
-      { name: "Dr. Emma Wang", title: "CEO, InfraGlobal" },
-      { name: "Liam Morgan", title: "Head of Projects, EU" },
-    ],
-    attendees: 400,
-    online: false,
-    description: "Explore the future of global infrastructure investment, technology, and policy with top leaders worldwide.",
-  },
-  {
-    id: 2,
-    title: "Sustainable Transport Webinar",
-    date: "2025-08-01",
-    location: "Online",
-    type: "Webinar",
-    category: "Webinars & Online Events",
     img: "/photo-1461749280684-dccba630e2f6.jpg",
+    attendees: 2500,
+    description: "Leading European event for solar and energy storage professionals featuring the latest technological innovations and market insights.",
+    sectors: ["Energy", "Solar", "Storage"],
+    online: false,
     speakers: [
-      { name: "Prof. Ana Reyes", title: "Transport Policy Expert" },
-    ],
-    attendees: 180,
-    online: true,
-    description: "Panel of experts on climate change mitigation through public transport infrastructure investment.",
+      { name: "Dr. Maria Santos", title: "Solar Innovation Director" },
+      { name: "Erik Johansson", title: "Energy Storage Expert" }
+    ]
   },
-  {
-    id: 3,
-    title: "Asia-Pacific Smart Cities Expo",
-    date: "2025-08-24",
-    location: "Singapore",
-    type: "Expo",
-    category: "Trade Shows",
+  { 
+    id: 2,
+    date: "Jul 1-3, 2025", 
+    title: "AgriVoltaics World Conference", 
+    location: "Freiburg, Germany",
+    type: "Conference",
+    category: "Conferences & Summits",
     img: "/photo-1500673922987-e212871fec22.jpg",
-    speakers: [
-      { name: "Satoshi Tanaka", title: "Smart Cities Leader, APAC" },
-      { name: "Lina Becker", title: "CTO, NextInfra" },
-    ],
-    attendees: 900,
+    attendees: 800,
+    description: "Global summit on combining agriculture with solar energy production, featuring case studies and policy discussions.",
+    sectors: ["Energy", "Agricultural", "Sustainability"],
     online: false,
-    description: "Innovations in urban infrastructure for rapidly growing cities across Asia-Pacific.",
+    speakers: [
+      { name: "Prof. Hans Mueller", title: "AgriSolar Research Lead" }
+    ]
   },
-  {
-    id: 4,
-    title: "Hydrogen Tech Insights Workshop",
-    date: "2025-09-14",
-    location: "Munich, Germany",
-    type: "Workshop",
-    category: "Workshops & Training",
+  { 
+    id: 3,
+    date: "Jul 2-4, 2025", 
+    title: "ASEAN Sustainable Energy Week", 
+    location: "Bangkok, Thailand",
+    type: "Trade Show",
+    category: "Trade Shows",
     img: "/photo-1486312338219-ce68d2c6f44d.jpg",
-    speakers: [
-      { name: "Oliver Brandt", title: "HydrogenTech AG" },
-    ],
-    attendees: 64,
+    attendees: 5000,
+    description: "Southeast Asia's premier platform for sustainable energy solutions and infrastructure development.",
+    sectors: ["Energy", "Sustainability", "Policy"],
     online: false,
-    description: "Hands-on workshop exploring the practical deployment of hydrogen technology.",
+    speakers: [
+      { name: "Sukanya Patel", title: "ASEAN Energy Director" },
+      { name: "Li Wei", title: "Renewable Systems Engineer" }
+    ]
   },
-  {
+  { 
+    id: 4,
+    date: "Sep 8-11, 2025", 
+    title: "RE+ (Solar, ESI & Smart Energy)", 
+    location: "Las Vegas, USA",
+    type: "Exhibition",
+    category: "Trade Shows",
+    img: "/photo-1605810230434-7631ac76ec81.jpg",
+    attendees: 25000,
+    description: "North America's largest renewable energy event bringing together the solar, energy storage, and smart energy sectors.",
+    sectors: ["Energy", "Solar", "Storage", "Smart Grid"],
+    online: false,
+    speakers: [
+      { name: "Jennifer Walsh", title: "Solar Industry Association" },
+      { name: "David Rodriguez", title: "Grid Modernization Expert" }
+    ]
+  },
+  { 
     id: 5,
-    title: "Circular Waste Summit",
-    date: "2025-07-24",
-    location: "Los Angeles, USA",
-    type: "Summit",
+    date: "Sep 9-11, 2025", 
+    title: "Enlit Asia", 
+    location: "Bangkok, Thailand",
+    type: "Conference",
     category: "Conferences & Summits",
     img: "/photo-1501854140801-50d01698950b.jpg",
-    speakers: [
-      { name: "Julia Becker", title: "VP Circular Economy, CleanLoop" },
-      { name: "Rahul Singh", title: "Founder, BruClean" },
-    ],
-    attendees: 245,
+    attendees: 3500,
+    description: "Asia's most important energy event covering the entire energy value chain and digital transformation.",
+    sectors: ["Energy", "Digital", "Grid Modernization"],
     online: false,
-    description: "Leaders in waste management, policy, and technology tackle zero waste strategies.",
+    speakers: [
+      { name: "Akiko Tanaka", title: "Energy Digital Solutions" },
+      { name: "Raj Kumar", title: "Smart Grid Technologies" }
+    ]
+  },
+  { 
+    id: 6,
+    date: "Sep 30-Oct 2, 2025", 
+    title: "Wetex & Dubai Solar Show", 
+    location: "Dubai, UAE",
+    type: "Exhibition",
+    category: "Trade Shows",
+    img: "/photo-1488590528505-98d2b5aba04b.jpg",
+    attendees: 15000,
+    description: "Middle East's largest water, energy, technology and environment exhibition showcasing cutting-edge solutions.",
+    sectors: ["Energy", "Water", "Environment", "Technology"],
+    online: false,
+    speakers: [
+      { name: "Ahmed Al-Rashid", title: "MENA Energy Council" },
+      { name: "Sarah Hassan", title: "Water Technology Innovations" }
+    ]
+  },
+  {
+    id: 7,
+    date: "Oct 15-17, 2025",
+    title: "Global Infrastructure Investment Summit",
+    location: "London, UK",
+    type: "Summit",
+    category: "Conferences & Summits",
+    img: "/photo-1518770660439-4636190af475.jpg",
+    attendees: 1200,
+    description: "Premier gathering of infrastructure investors, policymakers, and project developers from around the world.",
+    sectors: ["Finance", "Investment", "Policy"],
+    online: false,
+    speakers: [
+      { name: "Lord James Hamilton", title: "Infrastructure Investment Board" },
+      { name: "Catherine Morrison", title: "Global Infrastructure Partners" }
+    ]
+  },
+  {
+    id: 8,
+    date: "Nov 5-7, 2025",
+    title: "Transport Infrastructure Expo",
+    location: "Singapore",
+    type: "Exhibition",
+    category: "Trade Shows",
+    img: "/photo-1485827404703-89b55fcc595e.jpg",
+    attendees: 8000,
+    description: "Asia-Pacific's leading exhibition for transport infrastructure, covering rail, road, ports, and aviation.",
+    sectors: ["Transport", "Rail", "Aviation", "Ports"],
+    online: false,
+    speakers: [
+      { name: "Michael Chen", title: "APAC Transport Authority" },
+      { name: "Lisa Wang", title: "Smart Mobility Solutions" }
+    ]
   }
 ];
 
