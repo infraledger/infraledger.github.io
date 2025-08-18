@@ -3,13 +3,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import Community from "./pages/Community";
+import MarketAnalysis from "./pages/MarketAnalysis";
+import KeyDeals from "./pages/KeyDeals";
+import MarketSnapshot from "./pages/MarketSnapshot";
 import EventsPage from "./pages/Events";
-import DataIntelligencePage from "./pages/DataIntelligence";
-import ProjectTracker from "./pages/ProjectTracker";
-import FinancialData from "./pages/FinancialData";
-import ThematicDashboards from "./pages/ThematicDashboards";
-import GlobalInfrastructureMap from "./pages/GlobalInfrastructureMap";
 import NewsArticle from "./pages/NewsArticle";
 
 const queryClient = new QueryClient();
@@ -21,14 +18,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/community" element={<Community />} />
+          <Route path="/market-analysis" element={<MarketAnalysis />} />
+          <Route path="/key-deals" element={<KeyDeals />} />
+          <Route path="/market-snapshot" element={<MarketSnapshot />} />
           <Route path="/events" element={<EventsPage />} />
-          <Route path="/data-intelligence" element={<DataIntelligencePage />} />
-          <Route path="/data-intelligence/projects" element={<ProjectTracker />} />
-          {/* Remove Company Directory and add Global Map */}
-          <Route path="/data-intelligence/global-map" element={<GlobalInfrastructureMap />} />
-          <Route path="/data-intelligence/financials" element={<FinancialData />} />
-          <Route path="/data-intelligence/themes" element={<ThematicDashboards />} />
           <Route path="/news/:id" element={<NewsArticle />} />
         </Routes>
       </BrowserRouter>

@@ -32,54 +32,6 @@ const MainNavigation = ({ mainNavItems }: MainNavigationProps) => (
         <NavigationMenuItem key={item.label}>
           {item.subitems ? (
             <>
-              <NavigationMenuTrigger className="text-slate-300 hover:text-cyan-400 font-medium text-sm h-8 px-4 transition-all duration-300 hover:bg-slate-800/50 rounded-lg border border-transparent hover:border-cyan-500/30 bg-transparent">
-                <div className="flex items-center space-x-1">
-                  {item.icon}
-                  <span>{item.label}</span>
-                </div>
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="grid gap-1 p-4 w-64 bg-slate-950/95 backdrop-blur-xl border border-slate-700/50 shadow-2xl rounded-lg">
-                  {item.label === "Data & Intelligence" ? (
-                    <>
-                      <Link
-                        to="/data-intelligence/projects"
-                        className="block px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-md transition-all duration-300 border border-transparent hover:border-cyan-500/30"
-                      >
-                        Project Tracker
-                      </Link>
-                      <Link
-                        to="/data-intelligence/global-map"
-                        className="block px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-md transition-all duration-300 border border-transparent hover:border-cyan-500/30"
-                      >
-                        Global Infrastructure Map
-                      </Link>
-                      <Link
-                        to="/data-intelligence/financials"
-                        className="block px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-md transition-all duration-300 border border-transparent hover:border-cyan-500/30"
-                      >
-                        Financial Data
-                      </Link>
-                      <Link
-                        to="/data-intelligence/themes"
-                        className="block px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-md transition-all duration-300 border border-transparent hover:border-cyan-500/30"
-                      >
-                        Thematic Dashboards
-                      </Link>
-                    </>
-                  ) : (
-                    item.subitems.map((subitem) => (
-                      <a
-                        key={subitem.label}
-                        href={subitem.href}
-                        className="block px-3 py-2 text-sm text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-md transition-all duration-300 border border-transparent hover:border-cyan-500/30"
-                      >
-                        {subitem.label}
-                      </a>
-                    ))
-                  )}
-                </div>
-              </NavigationMenuContent>
             </>
           ) : item.to ? (
             <Link

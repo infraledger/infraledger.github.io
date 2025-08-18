@@ -32,42 +32,11 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const mainNavItems = [
-    { 
-      label: "News", 
-      href: "#news",
-      subitems: [
-        { label: "All News", href: "#all-news" },
-        { label: "Breaking", href: "#breaking" },
-        { label: "Analysis", href: "#analysis" },
-        { label: "Market Updates", href: "#market-updates" }
-      ]
-    },
-    { 
-      label: "Data & Intelligence", 
-      to: "/data-intelligence",
-      subitems: [
-        { label: "Project Tracker", href: "#projects" },
-        { label: "Company Directory", href: "#companies" },
-        { label: "Financial Data", href: "#financials" },
-        { label: "Thematic Dashboards", href: "#themes" }
-      ]
-    },
-    { 
-      label: "Geographies", 
-      href: "#geo",
-      subitems: [
-        { label: "North America", href: "#north-america" },
-        { label: "Europe", href: "#europe" },
-        { label: "Asia-Pacific", href: "#asia-pacific" },
-        { label: "Emerging Markets", href: "#emerging" }
-      ]
-    },
-    { label: "Events", to: "/events" },
-    { 
-      label: "Community", 
-      to: "/community",
-      icon: <Users className="h-4 w-4" />
-    }
+    { label: "Home", to: "/" },
+    { label: "Market Analysis", to: "/market-analysis" },
+    { label: "Key Deals", to: "/key-deals" },
+    { label: "Market Snapshot", to: "/market-snapshot" },
+    { label: "Events", to: "/events" }
   ];
 
   const trendingTopics = [
