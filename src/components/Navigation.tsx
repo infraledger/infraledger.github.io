@@ -1,27 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Search, Menu, Bell, TrendingUp, ChevronDown, Users } from "lucide-react";
+import { Search, Menu, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-} from "@/components/ui/dropdown-menu";
-import { infrastructureTypes } from "@/data/infrastructureData";
 
 // Import refactored components
 import TrendingBar from "./navigation/TrendingBar";
