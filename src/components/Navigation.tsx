@@ -44,7 +44,7 @@ const Navigation = () => {
                 <img 
                   src="/lovable-uploads/002a4431-70de-4334-875f-9f6ef07f6088.png" 
                   alt="InfraLedger" 
-                  className="h-12 w-auto filter drop-shadow-2xl contrast-110 brightness-110"
+                  className="h-24 w-auto filter drop-shadow-2xl contrast-110 brightness-110"
                 />
                 <div className="absolute inset-0 bg-cyan-400/15 blur-xl rounded-full"></div>
               </div>
